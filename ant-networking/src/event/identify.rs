@@ -102,7 +102,8 @@ impl SwarmDriver {
             if let Some(kbucket) = self.swarm.behaviour_mut().kademlia.kbucket(peer_id) {
                 let ilog2 = kbucket.range().0.ilog2();
                 let num_peers = kbucket.num_entries();
-                let is_bucket_full = num_peers >= K_VALUE.into();
+                let k_value_usize: usize = K_VALUE.into();
+		let is_bucket_full = num_peers >= k_value_usize;
 
                 // check if peer_id is already a part of RT
                 let already_present_in_rt = kbucket
